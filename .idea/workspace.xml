@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae3c2d33-80d1-40b1-8fed-ff03c68338bc" name="Changes" comment="Новый проект сделал с gpt">
+      <change beforePath="$PROJECT_DIR$/.gitignore " beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore " afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,7 +125,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1765115963993</updated>
-      <workItem from="1765115964993" duration="8836000" />
+      <workItem from="1765115964993" duration="9251000" />
     </task>
     <task id="LOCAL-00001" summary="Новый проект сделал с gpt">
       <option name="closed" value="true" />
