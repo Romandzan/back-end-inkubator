@@ -1,0 +1,4 @@
+export const ERROR_CODES = {
+    VALIDATION_ERROR: 'VALIDATION_ERROR',
+    TRACK_NOT_FOUND: 'TRACK_NOT_FOUND',
+} as const

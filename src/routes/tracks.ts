@@ -1,79 +1,32 @@
-import {Router} from 'express';
+import { Router } from "express";
+import { Errors } from "../errors/errors";
+import { CreateTrackDto } from "../services/track.service";
+import { createTracks } from "../services/track.service";
 
 const router = Router();
 
-interface Track {
-    id: number;
-    title: string;
-}
+router.post("/", (req, res, next) => {
+    try {
+        const body = req.body as CreateTrackDto;
 
-const track: Track[] = [
-    {id: 1, title: "Track 1"},
-    {id: 2, title: "Track 2"},
-    {id: 3, title: "Track 3"},
-    {id: 4, title: "Track 4"},
-]
+        // validation
+        if (!body.title || typeof body.title !== "string") {
+            throw Errors.validation("title is required");
+        }
 
-let nextId = 5
+        if (!body.artist || typeof body.artist !== "string") {
+            throw Errors.validation("artist is required");
+        }
 
-router.post("/", (req, res) => {
-    const { title } = req.body;
+        // business logic
+        const track = createTracks(body);
 
-
-    // Валидация
-    if (!title || typeof title !== "string") {
-        return res.status(400).json({
-            error: 'title is required and must be a string',
-        })
+        // success response
+        res.status(201).json(track);
+    } catch (err) {
+        next(err);
     }
-
-    // Создание трека
-    const newTrack = {
-        id: nextId++,
-        title,
-    };
-
-    track.push(newTrack)
-
-    // Ответ
-    res.status(201).json(newTrack)
-})
-
-router.get("/", (req, res) => {
-    res.json(track)
-})
-
-router.get("/:id", (req, res) => {
-    const foundTrack = track.find((t) => t.id === Number(req.params.id));
-    if (foundTrack) {
-        res.json(foundTrack)
-    }
-    if (!foundTrack) {
-        return res.status(404).json({error: "Not found"})
-    }
-    res.json(foundTrack)
-})
-
-router.patch("/:id", (req, res) => {
-    const {id} = req.params;
-    const index = track.findIndex((t) => t.id === Number(req.params.id));
-    if (index === -1)
-        return res.status(404).json({error: "Not found"})
-
-    if (typeof req.body.title === "string") {
-        track[index].title = req.body.title;
-    }
-    res.json(track[index])
-})
-
-router.delete("/:id", (req, res) => {
-    const { id } = req.params;
-    const index = track.findIndex((t) => t.id === Number(req.params.id));
-   if (index === -1)
-       return res.status(404).json({error: "Not found"})
-
-    track.splice(index, 1)
-    res.status(204).end('No content')
-})
+});
 
 export default router;
+

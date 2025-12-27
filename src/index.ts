@@ -12,7 +12,8 @@ app.get('/', (req, res) => {
     res.send("Hello Roman Paleha");
 
 });
-
+import {errorHandler} from './middlewares/error-handler';
+app.use(errorHandler);
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });
