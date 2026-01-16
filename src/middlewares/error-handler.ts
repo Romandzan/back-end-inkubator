@@ -15,6 +15,13 @@ export function errorHandler(
             },
         });
     }
+    if (!(err instanceof AppError)) {
+        console.error('Unhandled error:',{
+            err,
+            path: req.path,
+            method: req.method
+        });
+    }
 
     return res.status(500).json({
         error: {
