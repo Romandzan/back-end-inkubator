@@ -28,11 +28,6 @@ router.get(
     '/:id',
     asyncHandler(async (req, res) => {
         const id = Number(req.params.id);
-
-        if (Number.isNaN(id)) {
-            throw Errors.validation('id must be a number');
-        }
-
         const track = await getTrackById(id);
         res.status(200).json(track);
     })
@@ -42,12 +37,7 @@ router.delete(
     '/:id',
     asyncHandler(async (req, res) => {
         const id = Number(req.params.id);
-
-        if (Number.isNaN(id)) {
-            throw Errors.validation('id must be a number');
-        }
         await deleteTrackById(id);
-
         res.status(204).send();
     })
 );
@@ -57,12 +47,7 @@ router.put(
     validateUpdateTrack,
     asyncHandler(async (req, res) => {
         const id = Number(req.params.id);
-
-        if (Number.isNaN(id)) {
-            throw Errors.validation('id must be a number');
-        }
         const updatedTrack = await updateTrack(id, req.body)
-
         res.status(200).json(updatedTrack);
     })
 );
@@ -71,15 +56,9 @@ router.patch(
     '/:id',
     asyncHandler(async (req, res) => {
         const id = Number(req.params.id);
-
-        if (Number.isNaN(id)) {
-            throw Errors.validation('id must be a number');
-        }
         const updatedTrack = await patchTrackById(id, req.body)
-
         res.status(200).json(updatedTrack);
     })
 );
-
 
 export default router;

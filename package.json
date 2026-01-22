@@ -2,15 +2,19 @@
   "name": "p_soundox_dir",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "dev": "concurrently \"yarn watch\" \"yarn start\"",
     "build": "tsc",
     "watch": "tsc --watch",
-    "start": "nodemon dist/index.js"
+    "start": "nodemon dist/index.js",
+    "test": "vitest",
+    "test:run": "vitest run"
   },
-  "private": true,
   "dependencies": {
+    "@prisma/client": "^7.2.0",
     "express": "^5.2.1"
   },
   "devDependencies": {
@@ -20,6 +24,10 @@
     "nodemon": "^3.1.11",
     "prisma": "^7.2.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.17"
   }
 }
+
+
+
